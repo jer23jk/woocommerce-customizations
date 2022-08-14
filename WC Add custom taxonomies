@@ -1,0 +1,34 @@
+/**
+ * Add custom taxonomies
+ *
+ * Additional custom taxonomies can be defined here
+ * https://codex.wordpress.org/Function_Reference/register_taxonomy
+ */
+function add_brand_taxonomy() {
+  // Add new "Brands" taxonomy to product
+  register_taxonomy('brand', 'product', array(
+    // Hierarchical taxonomy (like categories)
+    'hierarchical' => false,
+    // This array of options controls the labels displayed in the WordPress Admin UI
+    'labels' => array(
+      'name' => _x( 'Brands', 'taxonomy general name' ),
+      'singular_name' => _x( 'Brand', 'taxonomy singular name' ),
+      'search_items' =>  __( 'Search Brands' ),
+      'all_items' => __( 'All Brands' ),
+      'parent_item' => __( 'Parent Brand' ),
+      'parent_item_colon' => __( 'Parent Brand:' ),
+      'edit_item' => __( 'Edit Brand' ),
+      'update_item' => __( 'Update Brand' ),
+      'add_new_item' => __( 'Add New Brand' ),
+      'new_item_name' => __( 'New Brand Name' ),
+      'menu_name' => __( 'Brands' ),
+    ),
+    // Control the slugs used for this taxonomy
+    'rewrite' => array(
+      'slug' => 'brand', // This controls the base slug that will display before each term
+      'with_front' => false, // Don't display the category base before "/Brands/"
+      'hierarchical' => false // This will allow URL's like "/Brands/boston/cambridge/"
+    ),
+  ));
+}
+add_action( 'init', 'add_brand_taxonomy', 0 );
